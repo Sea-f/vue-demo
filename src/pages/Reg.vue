@@ -12,12 +12,13 @@
         <el-input type="password" v-model="regFrom.confirmPassword"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="success">注册</el-button>
+        <el-button type="success" @click="submitForm('numberValidateForm')" >注册</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 <script>
+
 //注册需要完成的功能 一、在前端判断输入格式是否正确（使用正则）二、正确的用户名后判断数据库内知否存在（这个地方发送网络请求） 三、当符合所有要求后将用户名和密码保存到数据库当中（发送网络请求）
 export default {
     data(){
@@ -60,7 +61,19 @@ export default {
                     confirmPassword: [{ validator: checkPassword, trigger: "blur" }]
             }
         }
-    }
+    },
+    methods:{
+      submitForm(){
+          this.$refs.regForm.validate( (valid)=>{
+            if(valid){
+              this.$axios.post('http://localhost:')
+            }else{
+              window.console.log('校验失败');
+              return false
+            }
+          })
+      }
+  }
 }
 </script>
 <style>
